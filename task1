@@ -1,0 +1,53 @@
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append({"task": task, "completed": False})
+        print(f'Task "{task}" added.')
+
+    def complete_task(self, task):
+        for t in self.tasks:
+            if t["task"] == task:
+                t["completed"] = True
+                print(f'Task "{task}" marked as completed.')
+                return
+        print(f'Task "{task}" not found.')
+
+    def remove_task(self, task):
+        for t in self.tasks:
+            if t["task"] == task:
+                self.tasks.remove(t)
+                print(f'Task "{task}" removed.')
+                return
+        print(f'Task "{task}" not found.')
+
+    def show_tasks(self):
+        for idx, t in enumerate(self.tasks):
+            status = "Completed" if t["completed"] else "Pending"
+            print(f'{idx + 1}. {t["task"]} - {status}')
+
+if __name__ == "__main__":
+    todo_list = ToDoList()
+    
+    while True:
+        print("\nOptions: add, complete, remove, show, quit")
+        option = input("Choose an option: ").strip().lower()
+        
+        if option == "add":
+            task = input("Enter the task: ").strip()
+            todo_list.add_task(task)
+        elif option == "complete":
+            task = input("Enter the task to complete: ").strip()
+            todo_list.complete_task(task)
+        elif option == "remove":
+            task = input("Enter the task to remove: ").strip()
+            todo_list.remove_task(task)
+        elif option == "show":
+            todo_list.show_tasks()
+        elif option == "quit":
+            print("Exiting the to-do list application.")
+            break
+        else:
+            print("Invalid option, please try again.")
+
